@@ -19,19 +19,6 @@ services:
     links:
       - redis
 
-  cadvisor:
-    restart: always
-    image: google/cadvisor:latest
-    expose:
-      - "8080"
-    ports:
-      - "8080:8080"
-    volumes:
-      - /:/rootfs
-      - /var/run:/var/run
-      - /sys:/sys
-      - /var/lib/docker/:/var/lib/docker
-  # Redis
   redis:
     image: redis:2.8.19
     hostname: redis

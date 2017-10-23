@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
 # 3rd party
 INSTALLED_APPS += [
+    "main",
     "compressor",
     'djangobower',
     'crispy_forms',
@@ -50,7 +51,7 @@ INSTALLED_APPS += [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.facebook',
     'anymail',
     'django_celery_beat',
 ]
@@ -63,7 +64,6 @@ if DEBUG_TOOLBAR_ENABLED:
 
 # my apps
 INSTALLED_APPS += [
-    "main",
     'chat',
 ]
 
@@ -159,19 +159,19 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Auth backends
 AUTHENTICATION_BACKENDS = [
-    'django_starterkit.auth_backends.EmailOrUsernameModelBackend',
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
-# set login roles
-# Choices
-# email_username
-# email
-# username
-DSK_LOGIN_FIELDS = "email_username"
-
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+# ACCOUNT_SIGNUP_FORM_CLASS = 'main.forms.SignupForm'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 SITE_ID = 1
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # CELERY STUFF
 BROKER_URL = 'redis://redis:6379'
@@ -196,3 +196,4 @@ if DEBUG_TOOLBAR_ENABLED:
         "SHOW_TOOLBAR_CALLBACK": show_toolbar,
         "SHOW_COLLAPSED": True,
     }
+LOGIN_REDIRECT_URL = '/'
