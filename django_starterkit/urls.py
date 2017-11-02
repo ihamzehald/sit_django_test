@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^chat/', include('chat.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^polls/', include('polls.urls')),
 ]
 
 if settings.DEBUG_TOOLBAR_ENABLED:

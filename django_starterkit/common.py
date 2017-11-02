@@ -65,6 +65,7 @@ if DEBUG_TOOLBAR_ENABLED:
 # my apps
 INSTALLED_APPS += [
     'chat',
+    'polls'
 ]
 
 MIDDLEWARE = [

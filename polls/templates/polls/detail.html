@@ -1,0 +1,23 @@
+{% extends "chat/layout/layout.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div class="jumbotron">
+<h3>{{ question.question_text }}</h3>
+
+{% if error_message %}<p class="text-danger"><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+{% endfor %}
+<input type="submit" value="Vote" class="btn btn-success" />
+</form>
+<br>
+<br>
+<a href="{% url 'polls:index' %}" class="text-success"><-Back to question list</a>
+</div>
+{% endblock %}

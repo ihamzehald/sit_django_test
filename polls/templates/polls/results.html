@@ -1,0 +1,20 @@
+{% extends "chat/layout/layout.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div class="jumbotron">
+<h3>{{ question.question_text }}</h3>
+
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+<br>
+<br>
+<a href="{% url 'polls:index' %}" class="text-success"><-Back to question list</a>
+</div>
+{% endblock %}
