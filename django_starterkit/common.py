@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework'
 ]
 
 # 3rd party
@@ -65,7 +66,8 @@ if DEBUG_TOOLBAR_ENABLED:
 # my apps
 INSTALLED_APPS += [
     'chat',
-    'polls'
+    'polls',
+    'rest_quickstart'
 ]
 
 MIDDLEWARE = [
